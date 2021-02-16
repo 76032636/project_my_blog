@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load comment_tags %}
+{% load likes_tags %}
+{% load static %}
+{% block header_extend %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/blog_list.css' %}">
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+{% endblock %}
+
+{% block title %}博客列表{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 col-sm-8 col-md-9">
+				<div class="panel panel-default">
+				  <div class="panel-heading">{% block blog_num_for_each_type %}博客明细{% endblock %}</div>
+				  <div class="panel-body">
+				  	
+				  		 {% for blog in blogs %}
+					  		<div class="blogs" >
+					  			<a href="{% url 'blog_detail' blog.pk %}"><h3>{{ blog.title }}</h3></a>
+					  			<p class="blog-info">
+					  				<span class="glyphicon glyphicon-user" ></span> {{ blog.author }}
+					  				<span class="glyphicon glyphicon-calendar" ></span> {{ blog.creat_time|date:"Y-m-d"}}
+					  				<span class="glyphicon glyphicon-tags" ></span><a href="{% url 'blog_with_type' blog.blog_type.pk %}">{{ blog.blog_type }}</a>
+					  				&nbsp;&nbsp;阅读（{{ blog.read_num }}）
+					  				<span>评论({% get_comment_num blog %})</span>
+									<span class="like_number">
+									&nbsp;&nbsp;点赞({% get_like_num blog %})</span>
+					  			</p>
+								
+								<p>{{ blog.content|safe|truncatechars:40 }}</p>
+								
+							</div>
+						{% empty %}
+							<div class="blogs">
+								<p>目前还没有数据</p>
+							</div>
+						{% endfor %}
+				  	
+				  </div>
+				</div>	
+				<div class="paginator">
+					  <ul class="pagination">
+					    <li>
+					    	{% if list.has_previous %}
+							    <a href="?page={{list.previous_page_number}}" aria-label="Previous">
+							        <span aria-hidden="true">&laquo;</span>
+						        </a>
+					    	{% else %}
+								
+							        <span aria-hidden="true">&laquo;</span>
+						        
+					    	{% endif %}
+					   
+					    </li>
+					    	{%for page_num in page_range%}
+						    	{% if page_num == list.number %}
+									<li class="active"><span>{{page_num}}</span></li>
+						    	{% else %}
+							    	{% if page_num == '...' %}
+									<li><span>{{ page_num }}</span></li>
+							    	
+							    	{% else %}
+							    	<li><a href="?page={{page_num}}">{{page_num}}</a></li>
+							    	{% endif %}
+						    	{% endif %}
+								
+					    	
+							{% endfor %}
+						    
+					    <li>
+					    	{% if list.has_next %}
+							    <a href="?page={{list.next_page_number}}" aria-label="Next">
+							        <span aria-hidden="true">&raquo;</span>
+						        </a>
+					    	{% else %}
+							        <span aria-hidden="true">&raquo;</span>
+					    	{% endif %}
+					     
+					    </li>
+					  </ul>
+					  <p>当前第{{list.number}}页，共有{{list.paginator.num_pages}}页，一共有{{list.paginator.count}}文章,</p>
+				</div>
+			</div>
+			<div class="hidden-xs col-sm-4 col-md-3">
+				<div class="panel panel-default">
+				  <div class="panel-heading">博客分类</div>
+				  <div class="panel-body">
+				    <ul class="blog_types">
+						{% for blog_type in blog_types %}
+							<li>
+								<a href="{% url 'blog_with_type' blog_type.pk%}">
+								{{blog_type.type_name}}({{blog_type.blog_count}})
+								</a>
+							</li>
+						{% empty%}
+							<li><h3>暂时没有分类</h3></li>
+						{% endfor %}
+					</ul>
+				  </div>
+				</div>	
+				<div class="panel panel-default">
+					<div class="panel-heading">日期分类</div>
+						<div class="panel-body">
+							<ul class="blog_dates">
+								{% for blog_date, count in blog_dates.items %}
+									<li>
+										<a href="{% url 'blog_with_data' blog_date.year blog_date.month %}">{{blog_date|date:'Y年m月'}}({{count}})</a>
+									</li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>	
+				</div>	
+			</div>
+		</div>		
+	</div>
+{% endblock %}
+
+{% block nav_blog_activive %}
+active
+{% endblock %}

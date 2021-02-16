@@ -1,0 +1,26 @@
+
+h3.home-content {
+		font-size: 300%;
+	    text-align: center;
+	    margin-top: 4em;
+	    margin-bottom: 2em;
+}
+
+div#container {
+	margin: 0 auto;
+	height:  20em;
+	min-width: 20em;
+	max-width: 70em;
+}
+
+div.hot-blog{
+	text-align: center;
+	margin-top: 2em;
+}
+
+ul {
+	list-style-type: none;;
+}
+ul.errorlist.nonfield {
+	padding-left: 0
+}

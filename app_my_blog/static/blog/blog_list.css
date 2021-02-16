@@ -1,0 +1,120 @@
+ul.blog_types{
+	padding-inline-start: 0px!important;
+	list-style-type: none;
+	}
+
+ ul.blog_dates{
+ 	padding-inline-start: 0px!important;
+	list-style-type: none;
+	
+ }
+
+
+div.blogs:not(:last-child){
+	margin-bottom: 2em;
+	padding-bottom: 1em;
+	border-bottom: 1px solid #ccc;
+
+}
+
+div.blogs h3{
+	margin-top: 0.5em!important;
+}
+
+div.blogs p.blog-info{
+	margin: 0;
+}
+
+span{
+	    padding-right: 0.5em;
+	    padding-left:0.5em;
+	}
+
+ul.blog_detail_info{
+	padding-inline-start: 0px!important;
+	list-style-type: none;
+	margin-bottom: 2em;
+
+}
+
+ul.blog_detail_info li{
+
+	display: inline-block;
+	margin-right: 1em;
+}
+
+div.blog_content{
+	text-indent: 2em;
+	margin-bottom: 2em;
+}
+div.paginator{
+	text-align: center;
+}
+
+div.blog_more{
+	margin-top: 1em;
+}
+
+div.comment-area{
+	margin-top:2em;
+}
+
+h3.comment-area-list{
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 0.4em;
+}
+ul.comment-list {
+	list-style-type: none;
+	padding-left: 0px;
+}
+
+li.comment-list-detail {
+	padding-bottom: 0.5em;
+}
+div.django-ckeditor-widget{
+	width: 100%
+}
+
+div.comment{
+	border-bottom: 1px dashed #ccc;
+	margin-bottom: 0.5em;
+	padding-bottom: 0.5em;
+}
+
+div.reply{
+	margin-left: 2em;
+
+}
+span{
+	padding: 0;
+}
+span#reply_to_user{
+	font-weight:bold;
+}
+span.glyphicon {
+	padding-right: 8px;
+
+}
+
+div#reply_container{
+	display: block;
+    border: 1px solid #d9d9d9;
+    background-color: #f8f8f8;
+    border-bottom: none;
+    overflow: hidden;
+    padding: 1em 1em 0.5em 0.5em;
+}
+
+p#reply_reply{
+	border-bottom: 1px #ccc dashed;
+    padding-bottom: 1em;
+}
+div.like{
+	color: #337ab7;
+	cursor:pointer;
+	display: inline-block;
+}
+
+span.active{
+	color: red;
+}

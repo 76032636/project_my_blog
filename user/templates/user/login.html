@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block nav_home_activive %}
+active
+{% endblock%}
+
+{% block header_extend %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">	
+{% endblock %}
+
+{% block title %}
+我的网站|登录
+{% endblock %}
+
+{% block content %}	
+<div class="container">
+	<div class="row">
+		<div class="col-xs-4  col-xs-offset-4">
+			
+			<div class="panel panel-default">
+				{% if not user.is_authenticated %}
+			  <div class="panel-heading">
+			    <h3 class="panel-title">登录</h3>
+			  </div>
+			  <div class="panel-body">
+			    <form action="#" method="POST" >
+					{% csrf_token %}
+					{% for field in login_form %}
+						<label for="{{ field.id_for_label }}">{{ field.label }}</label> 
+						{{ field }}
+						<p class="text-danger">
+						{{ field.errors.as_text }}
+						</p>
+					{% empty %}
+
+					{% endfor %}
+					<span class="pull-left text-danger">{{ login_form.non_field_errors }}</span>
+					<a href="{% url 'forget_password' %}" class="pull-left">忘记密码?</a>
+					<input type="submit" value="登录" class="btn btn-primary pull-right" >
+				</form>
+			  </div>
+			  {% else %}
+				<span>登录成功，正在跳转至首页...</span>
+				<script type="text/javascript">
+					function relocate(){
+						window.location.href="/"
+					};
+					setTimeout(relocate,3000);
+				</script>
+			{% endif %}
+			</div>
+		</div> 
+	</div>
+</div>
+{% endblock %}

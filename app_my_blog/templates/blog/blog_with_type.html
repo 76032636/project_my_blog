@@ -1,0 +1,13 @@
+{% extends 'blog/blog_list.html' %}
+
+{% block title %}{{ types }}{% endblock %}
+
+
+{% block blog_num_for_each_type %}
+分类明细 : 
+{{ types }}
+(共有{{list.paginator.count}}篇文章)
+<a href="{% url 'blog_list' %}">查看所有博客</a>
+{% endblock %}
+
+	
